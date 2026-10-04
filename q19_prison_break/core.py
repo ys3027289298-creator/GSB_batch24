@@ -6,37 +6,44 @@ def new_game():
 
 def bug_13(state):
     state["src"] -= 5
+    state["dst"] += 5
     return True
 
 def bug_16(state):
-    return state["audit"]
+    return [row for row in state["audit"] if row[0] == "a"]
 
 def bug_19(state):
-    return True
+    return state["slots"] < state["cap"]
 
 def bug_22(state):
-    return False
+    return not state["paused"]
 
 def bug_25(state):
+    if state["paused"]:
+        return 0
     state["clock"] += 1
     return state["clock"]
 
 def bug_28(state):
-    return True
+    return state.get("locked", False)
 
 def bug_1(state):
+    if len(state["items"]) >= state["cap"]:
+        return False
     state["items"].append("x")
     return True
 
 def bug_4(state):
-    return True
+    return not state["paused"]
 
 def bug_7(state):
-    state["count"] += 2
+    state["count"] += 1
     return state["count"]
 
 def bug_10(state):
-    state["amount"] += -5
+    if state["amount"] < 5:
+        return False
+    state["amount"] -= 5
     return True
 
 def main():
