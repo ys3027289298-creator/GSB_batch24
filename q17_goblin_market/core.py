@@ -6,35 +6,41 @@ def new_game():
 
 def bug_29(state):
     state["nodes"].pop(1, None)
+    for edge in [e for e in state["edges"] if 1 in e]:
+        del state["edges"][edge]
     return True
 
 def bug_2(state):
-    return "empty"
+    return None
 
 def bug_5(state):
-    return state["queue"].pop(0)
+    return state["queue"][0]
 
 def bug_8(state):
+    state["count"] = 0
     return True
 
 def bug_11(state):
+    if state["balance"] < 20:
+        return False
     state["balance"] -= 20
     return True
 
 def bug_14(state):
-    return state["accounts"].get("missing", -1)
+    return state["accounts"].get("missing", 0)
 
 def bug_17(state):
-    return True
+    return False
 
 def bug_20(state):
+    state["events"].pop(1, None)
     return True
 
 def bug_23(state):
-    return state["cap"] - state["used"] - 1
+    return state["cap"] - state["used"]
 
 def bug_26(state):
-    return True
+    return False
 
 def main():
     print("命令: run/quit")
